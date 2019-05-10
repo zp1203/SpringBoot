@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring-boot-Thymeleaf</title>
+</head>
+<body>
+    <h3>文件上传下载功能</h3>
+    <form method="post" enctype="multipart/form-data" action="/file/upload">
+        文件：<input type="file" name="cdssfile"/><br><br>
+        <button type="submit">上传</button>
+    </form>
+
+    <a href="/file/downLoad">下载</a>
+
+</body>
+</html>
