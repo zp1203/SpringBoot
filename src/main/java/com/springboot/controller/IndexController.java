@@ -1,6 +1,7 @@
 package com.springboot.controller;
 
-import com.springboot.bean.UseInfo;
+import com.springboot.vo.UseInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,9 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/index/")
+@Slf4j
 public class IndexController {
+
 
     /**
      * Value 这个注解的作用：
@@ -25,6 +28,13 @@ public class IndexController {
     @ResponseBody
     @RequestMapping(value = "test")
     public String indexTest(){
+        /**
+         * 测试日志
+         */
+        log.error("error...");
+        log.warn("warn...");
+        log.info("info...");
+
         return "hello,world";
     }
 
