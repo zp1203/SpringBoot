@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by zp on 2019/4/20.
@@ -66,6 +69,27 @@ public class IndexController {
         map.put("name",name);
         map.put("value",value);
         return  map;
+    }
+
+    /**
+     * 获取代码
+     * @throws InterruptedException
+     */
+    @ResponseBody
+    @RequestMapping("getdm")
+    public String getDm() throws InterruptedException {
+        for(int i=0 ; i<110;i++){
+            Thread.sleep(1000);
+            int max = 99999;
+            int min = 10000;
+            Random random = new Random();
+            int result = random.nextInt(max) % (max - min + 1) + min;
+            SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+            String id = sdFormat.format(new Date());
+            id += result;
+            System.out.println("GZ"+id);
+        }
+        return "生成代码,OK";
     }
 
 

@@ -80,11 +80,16 @@ public class FileController {
      */
     @ResponseBody
     @RequestMapping(value = "multiUpload")
-    public void multUpload(@RequestParam("multiFile") MultipartFile[] multipartFiles,HttpServletRequest request){
-        //获得文件名
-//        String fileName = multipartFile.;
-//        System.out.println("11");
-
+    public void multUpload(HttpServletResponse response,HttpServletRequest request){
+        response.setCharacterEncoding("UTF-8");
+        Integer chunk = null;// 分割块数
+        Integer chunks = null;// 总分割数
+        String tempFileName = null;// 临时文件名
+        String newFileName = null;// 最后合并后的新文件名
+        String newFileDM = null;// 最后合并后的新文件代码
+        String existFileName = request.getParameter("uploadFileName");
+        String existFileDM = request.getParameter("uploadFileDM");
+        BufferedOutputStream outputStream = null;
     }
 
 
