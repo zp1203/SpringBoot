@@ -31,12 +31,18 @@
             dragdrop: true,
             filters : {
                 // Maximum file size
-                max_file_size : '10mb',
+                max_file_size : '512mb',
                 // Specify what files to browse for
-                mime_types: [
-                    {title : "Image files", extensions : "jpg,gif,png"},
-                    {title : "Zip files", extensions : "zip"}
-                ]
+                mime_types : [ {
+                    title : "Image files",
+                    extensions : "jpg,gif,png"
+                }, {
+                    title : "Zip files",
+                    extensions : "rar,zip,7z"
+                }, {
+                    title : "Document files",
+                    extensions : "pdf,txt,xlsx,xls,docx,doc,pptx,ppt"
+                } ]
             },
 
             // Resize images on clientside if we can
