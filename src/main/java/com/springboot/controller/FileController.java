@@ -1,6 +1,9 @@
 package com.springboot.controller;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,10 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -74,30 +81,98 @@ public class FileController {
     }
 
     /**
-     * 在选择文件点击上传(多文件上传)
-     * @param
-     * @return
+     * * 在选择文件点击上传(多文件上传)
+     * @param request
+     * @param response
+     * @throws IOException
      */
     @ResponseBody
     @RequestMapping(value = "multiUpload")
-    public void multUpload(HttpServletResponse response,HttpServletRequest request){
+    public void multUpload(HttpServletRequest request,HttpServletResponse response) throws IOException {
         response.setCharacterEncoding("UTF-8");
-        Integer chunk = null;// 分割块数
-        Integer chunks = null;// 总分割数
-        String tempFileName = null;// 临时文件名
-        String newFileName = null;// 最后合并后的新文件名
-        String newFileDM = null;// 最后合并后的新文件代码
-        String existFileName = request.getParameter("uploadFileName");
-        String existFileDM = request.getParameter("uploadFileDM");
-        BufferedOutputStream outputStream = null;
+        if (ServletFileUpload.isMultipartContent(request)) {
+            MultipartHttpServletRequest multiReq = (MultipartHttpServletRequest) request;
+            HashMap<String, MultipartFile> fileMap = (HashMap<String, MultipartFile>) multiReq.getFileMap();
+            InputStream inputStream = null;
+            FileOutputStream outputStream = null;
+            try {
+                //上传是否成功
+                boolean status=false;
+                //获取文件名
+                String fileName = "";
+                //获取上传路径
+                String url="";
+                for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
+                    MultipartFile file = entry.getValue();
+                    inputStream = file.getInputStream();
+                    File fileDir = new File(filePath);
+                    if (!fileDir.exists() || !fileDir.isDirectory()) {
+                        fileDir.mkdir();
+                    }
+                    File uploadFile = new File(filePath + UUID.randomUUID() + file.getOriginalFilename());
+                    if (uploadFile.exists()) {
+                        uploadFile.delete();
+                    }
+                    uploadFile.createNewFile();
+                    outputStream = new FileOutputStream(uploadFile);
+                    byte[] bs = new byte[1024];
+                    int len = 0;
+                    while ((len = inputStream.read(bs)) > 0) {
+                        outputStream.write(bs);
+                    }
+                    System.out.println(file.getOriginalFilename() + "上传成功");
+                    status=true;
+                    fileName=file.getOriginalFilename();
+                    url = filePath + UUID.randomUUID() + file.getOriginalFilename();
+
+                }
+                //为返回到页面做准备
+                Map<String,Object> m = new HashMap<>(3);
+                m.put("status",status);
+                m.put("fileName",fileName);
+                m.put("fileUrl",url);
+                response.getWriter().write(JSON.toJSONString(m));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Map<String,Object> m = new HashMap<>(1);
+                m.put("status",false);
+                response.getWriter().write(JSON.toJSONString(m));
+            } finally {
+                try {
+                    if (inputStream != null) {
+                        inputStream.close();
+                    }
+                    if (outputStream != null) {
+                        outputStream.close();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Map<String,Object> m = new HashMap<>(1);
+                    m.put("status",false);
+                    response.getWriter().write(JSON.toJSONString(m));
+                }
+
+            }
+        }
+
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "saveFile")
+    public  String saveFile(@RequestParam String fileName,@RequestParam String fileUrl){
+        System.out.println(fileName);
+        System.out.println(fileUrl);
+        return "成功";
     }
 
 
 
-
     /**
-     * 文件的下载
-     *
+     * 文件下载
+     * @param response
+     * @param mc
+     * @throws IOException
      */
     @RequestMapping(value = "downLoad/{mc}")
     public void downLoad(HttpServletResponse response, @PathVariable String mc) throws IOException {

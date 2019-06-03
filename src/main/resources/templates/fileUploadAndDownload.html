@@ -57,7 +57,27 @@
             flash_swf_url : '/plupload/Moxie.swf',
 
             // Silverlight settings
-            silverlight_xap_url : '/plupload/Moxie.xap'
+            silverlight_xap_url : '/plupload/Moxie.xap',
+            init:{
+                FileUploaded :function (up,file,result) {
+                    var results = $.parseJSON(result.response);
+                    if(results.status === true){
+                        $.ajax({
+                            url:"/file/saveFile",
+                            async:false,
+                            type:"GET",
+                            data:{
+                                fileName:file.name,
+                                fileUrl:results.fileUrl
+                            },
+                            dataType: "json",
+                            success: function(){
+                                alert(11);
+                            }
+                        })
+                    }
+                }
+            }
         })
     })
 </script>
