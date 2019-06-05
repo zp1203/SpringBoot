@@ -43,7 +43,10 @@
 
 .plupload_wrapper {
 	font: normal 11px Verdana,sans-serif;
-	width: 100%;
+	/*取消自适应宽度*/
+	/*width: 100%;*/
+	/*给一个固定的宽度*/
+	width: 570px;
 }
 
 .plupload_container {
@@ -60,7 +63,8 @@
 
 .plupload_header {background: #2A2C2E url('../img/backgrounds.gif') repeat-x;}
 .plupload_header_content {
-	background: url('../img/backgrounds.gif') no-repeat 0 -317px;
+	/*删除plupload的logo*/
+	/*background: url('../img/backgrounds.gif') no-repeat 0 -317px;*/
 	min-height: 56px;
 	padding-left: 60px;
 	color: #FFF;

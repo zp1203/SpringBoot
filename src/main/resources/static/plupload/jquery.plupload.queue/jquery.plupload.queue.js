@@ -94,19 +94,19 @@ used as it is.
 			'<div class="plupload_wrapper plupload_scroll">' +
 				'<div id="' + id + '_container" class="plupload_container">' +
 					'<div class="plupload">' +
-						'<div class="plupload_header">' +
-							'<div class="plupload_header_content">' +
-								'<div class="plupload_header_title">' + _('Select files') + '</div>' +
-								'<div class="plupload_header_text">' + _('Add files to the upload queue and click the start button.') + '</div>' +
-							'</div>' +
-						'</div>' +
+						// '<div class="plupload_header">' +
+						// 	'<div class="plupload_header_content">' +
+						// 		'<div class="plupload_header_title">' + _('Select files') + '</div>' +
+						// 		'<div class="plupload_header_text">' + _('Add files to the upload queue and click the start button.') + '</div>' +
+						// 	'</div>' +
+						// '</div>' +
 
 						'<div class="plupload_content">' +
 							'<div class="plupload_filelist_header">' +
-								'<div class="plupload_file_name">' + _('Filename') + '</div>' +
+								'<div class="plupload_file_name">' + _('文件名') + '</div>' +
 								'<div class="plupload_file_action">&nbsp;</div>' +
-								'<div class="plupload_file_status"><span>' + _('Status') + '</span></div>' +
-								'<div class="plupload_file_size">' + _('Size') + '</div>' +
+								'<div class="plupload_file_status"><span>' + _('状态') + '</span></div>' +
+								'<div class="plupload_file_size">' + _('大小') + '</div>' +
 								'<div class="plupload_clearer">&nbsp;</div>' +
 							'</div>' +
 
@@ -115,8 +115,8 @@ used as it is.
 							'<div class="plupload_filelist_footer">' +
 								'<div class="plupload_file_name">' +
 									'<div class="plupload_buttons">' +
-										'<a href="#" class="plupload_button plupload_add" id="' + id + '_browse">' + _('Add Files') + '</a>' +
-										'<a href="#" class="plupload_button plupload_start">' + _('Start Upload') + '</a>' +
+										'<a href="#" class="plupload_button plupload_add" id="' + id + '_browse">' + _('增加文件') + '</a>' +
+										'<a href="#" class="plupload_button plupload_start">' + _('开始上传') + '</a>' +
 									'</div>' +
 									'<span class="plupload_upload_status"></span>' +
 								'</div>' +
@@ -259,7 +259,7 @@ used as it is.
 
 					// Re-add drag message if there is no files
 					if (!uploader.files.length && uploader.features.dragdrop && uploader.settings.dragdrop) {
-						$('#' + id + '_filelist').append('<li class="plupload_droptext">' + _("Drag files here.") + '</li>');
+						$('#' + id + '_filelist').append('<li class="plupload_droptext">' + _("拖拽上传") + '</li>');
 					}
 				}
 
@@ -363,7 +363,7 @@ used as it is.
 				uploader.bind("PostInit", function(up) {
 					// features are populated only after input components are fully instantiated
 					if (up.settings.dragdrop && up.features.dragdrop) {
-						$('#' + id + '_filelist').append('<li class="plupload_droptext">' + _("Drag files here.") + '</li>');
+						$('#' + id + '_filelist').append('<li class="plupload_droptext">' + _("拖拽上传") + '</li>');
 					}
 				});
 

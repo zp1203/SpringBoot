@@ -4,7 +4,7 @@
     <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>
-                %d - %msg%n
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
             </pattern>
         </layout>
     </appender>
@@ -24,7 +24,7 @@
 
         <encoder>
             <pattern>
-                %d - %msg%n
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
             </pattern>
         </encoder>
         <!--滚动策略-->
@@ -43,7 +43,7 @@
 
         <encoder>
             <pattern>
-                %d - %msg%n
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
             </pattern>
         </encoder>
         <!--滚动策略-->
