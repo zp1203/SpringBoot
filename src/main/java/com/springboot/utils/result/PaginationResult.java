@@ -1,4 +1,4 @@
-package com.springboot.result;
+package com.springboot.utils.result;
 
 import lombok.Getter;
 import lombok.Setter;

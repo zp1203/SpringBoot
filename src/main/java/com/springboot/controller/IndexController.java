@@ -1,11 +1,10 @@
 package com.springboot.controller;
 
-import com.springboot.result.Result;
+import com.springboot.utils.result.Result;
 import com.springboot.utils.ResultUtils;
 import com.springboot.vo.UseInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +40,7 @@ public class IndexController {
         log.warn("warn...");
         log.info("info...");
 
-        return ResultUtils.generate("hello,word");
+        return ResultUtils.generate(HttpServletResponse.SC_OK,"hello,word");
     }
 
     /**
@@ -68,10 +67,16 @@ public class IndexController {
     @RequestMapping(value = "get")
     public Result<Map<String,Object>> getValue(@RequestParam String name,@RequestParam Integer age){
         Map<String,Object> map = new HashMap<>(3);
-        map.put("年龄",age);
-        map.put("name",name);
-        map.put("value",value);
-        return  ResultUtils.generate(HttpServletResponse.SC_OK,map);
+        try{
+            map.put("年龄",age);
+            map.put("name",name);
+            map.put("value",value);
+            return  ResultUtils.generate(HttpServletResponse.SC_OK,map);
+        }catch(Exception e){
+            e.getMessage();
+            return  ResultUtils.generate(HttpServletResponse.SC_NOT_FOUND,null);
+        }
+
     }
 
     /**

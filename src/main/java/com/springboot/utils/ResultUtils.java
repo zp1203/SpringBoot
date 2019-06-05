@@ -1,8 +1,8 @@
 package com.springboot.utils;
 
 import com.google.common.collect.Maps;
-import com.springboot.result.PaginationResult;
-import com.springboot.result.Result;
+import com.springboot.utils.result.PaginationResult;
+import com.springboot.utils.result.Result;
 
 
 import java.util.Map;
@@ -19,11 +19,11 @@ public class ResultUtils {
     }
     @SuppressWarnings("unchecked")
     public static <T> Result<T> generate(int status, T data) {
-        return new Result(status, (String)messageMap.get(status), data);
+        return new Result(status, messageMap.get(status), data);
     }
     @SuppressWarnings("unchecked")
     public static <T> Result<T> generate(T data) {
-        return new Result(200, (String)messageMap.get(200), data);
+        return new Result(200, messageMap.get(200), data);
     }
     @SuppressWarnings("unchecked")
     public static <T> PaginationResult<T> generate(int status, String message, T data, int count) {
@@ -31,11 +31,11 @@ public class ResultUtils {
     }
     @SuppressWarnings("unchecked")
     public static <T> PaginationResult<T> generate(int status, T data, int count) {
-        return new PaginationResult(status, (String)messageMap.get(status), count, data);
+        return new PaginationResult(status, messageMap.get(status), count, data);
     }
     @SuppressWarnings("unchecked")
     public static <T> PaginationResult<T> generate(T data, int count) {
-        return new PaginationResult(200, (String)messageMap.get(200), count, data);
+        return new PaginationResult(200, messageMap.get(200), count, data);
     }
 
     static {

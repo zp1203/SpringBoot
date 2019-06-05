@@ -6510,7 +6510,7 @@ define("moxie/image/Image", [
 						var tr = new Transporter();
 
 						tr.bind("TransportingComplete", function() {
-							runtime = self.connectRuntime(this.result.ruid);
+							runtime = self.connectRuntime(com.springboot.utils.result.ruid);
 
 							self.bind("Embedded", function() {
 								// position and size properly
@@ -6534,7 +6534,7 @@ define("moxie/image/Image", [
 								runtime = null; // release
 							}, 999);
 
-							runtime.exec.call(self, "ImageView", "display", this.result.uid, width, height);
+							runtime.exec.call(self, "ImageView", "display", com.springboot.utils.result.uid, width, height);
 							img.destroy();
 						});
 
@@ -10306,7 +10306,7 @@ define("moxie/runtime/flash/xhr/XMLHttpRequest", [
 				var tr = new Transporter();
 
 				tr.bind("TransportingComplete", function() {
-					cb(this.result);
+					cb(com.springboot.utils.result);
 				});
 
 				tr.transport(blob.getSource(), blob.type, {
@@ -10443,7 +10443,7 @@ define("moxie/runtime/flash/image/Image", [
 			if (blob.isDetached()) { // binary string
 				var tr = new Transporter();
 				tr.bind("TransportingComplete", function() {
-					exec(tr.result.getSource());
+					exec(com.springboot.utils.result.getSource());
 				});
 				tr.transport(blob.getSource(), blob.type, { ruid: self.uid });
 			} else {
