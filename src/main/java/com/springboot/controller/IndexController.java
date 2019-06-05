@@ -1,11 +1,14 @@
 package com.springboot.controller;
 
+import com.springboot.result.Result;
+import com.springboot.utils.ResultUtils;
 import com.springboot.vo.UseInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,7 +19,7 @@ import java.util.Random;
  * Created by zp on 2019/4/20.
  * @author zp
  */
-@Controller
+@RestController
 @RequestMapping(value = "/index/")
 @Slf4j
 public class IndexController {
@@ -28,9 +31,9 @@ public class IndexController {
     @Value(value = "${zp.secret}")
     private  String value;
 
-    @ResponseBody
+//    @ResponseBody
     @RequestMapping(value = "test")
-    public String indexTest(){
+    public Result<String> indexTest(){
         /**
          * 测试日志
          */
@@ -38,7 +41,7 @@ public class IndexController {
         log.warn("warn...");
         log.info("info...");
 
-        return "hello,world";
+        return ResultUtils.generate("hello,word");
     }
 
     /**
@@ -47,13 +50,13 @@ public class IndexController {
      * @param name
      * @return
      */
-    @ResponseBody
+//    @ResponseBody
     @RequestMapping(value = "find/{id}/{name}")
-    public UseInfo find(@PathVariable Integer id, @PathVariable String name){
+    public Result<UseInfo> find(@PathVariable Integer id, @PathVariable String name){
         UseInfo useInfo =new UseInfo();
         useInfo.setId(id);
         useInfo.setName(name);
-        return useInfo;
+        return ResultUtils.generate(useInfo);
     }
 
     /**
@@ -61,23 +64,23 @@ public class IndexController {
      * @param name
      * @return
      */
-    @ResponseBody
+//    @ResponseBody
     @RequestMapping(value = "get")
-    public Map<String,Object> getValue(@RequestParam String name,@RequestParam Integer age){
+    public Result<Map<String,Object>> getValue(@RequestParam String name,@RequestParam Integer age){
         Map<String,Object> map = new HashMap<>(3);
         map.put("年龄",age);
         map.put("name",name);
         map.put("value",value);
-        return  map;
+        return  ResultUtils.generate(HttpServletResponse.SC_OK,map);
     }
 
     /**
      * 获取代码
      * @throws InterruptedException
      */
-    @ResponseBody
+//    @ResponseBody
     @RequestMapping("getdm")
-    public String getDm() throws InterruptedException {
+    public Result<String> getDm() throws InterruptedException {
         for(int i=0 ; i<110;i++){
             Thread.sleep(1000);
             int max = 99999;
@@ -89,7 +92,7 @@ public class IndexController {
             id += result;
             System.out.println("GZ"+id);
         }
-        return "生成代码,OK";
+        return ResultUtils.generate("生成代码,OK");
     }
 
 
