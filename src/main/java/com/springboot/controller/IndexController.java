@@ -85,7 +85,7 @@ public class IndexController {
      * @throws InterruptedException
      */
 //    @ResponseBody
-    @RequestMapping("getdm")
+    @RequestMapping("getDm")
     public Result<String> getDm() throws InterruptedException {
         for(int i=0 ; i<110;i++){
             Thread.sleep(1000);

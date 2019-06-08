@@ -27,7 +27,7 @@ public class User {
     //密码
     private String user_password;
     //创建时间
-    private Date creat_time;
+    private Date create_time;
     //更新时间
     private Date update_time;
 
