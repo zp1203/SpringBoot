@@ -1,9 +1,13 @@
 package com.springboot.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.springboot.service.DocumentService;
+import com.springboot.utils.ResultUtils;
+import com.springboot.utils.result.Result;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +33,9 @@ import java.util.UUID;
 @RequestMapping(value = "/file/")
 @Slf4j
 public class FileController {
+
+    @Autowired
+    private DocumentService documentService;
 
     /**
      * 获取 上传文件路径
@@ -160,10 +167,14 @@ public class FileController {
 
     @ResponseBody
     @RequestMapping(value = "saveFile")
-    public  String saveFile(@RequestParam String fileName,@RequestParam String fileUrl){
-        System.out.println(fileName);
-        System.out.println(fileUrl);
-        return "成功";
+    public Result<Boolean> saveFile(@RequestParam String fileName, @RequestParam String fileUrl){
+        try {
+            documentService.saveDocument(fileName,fileUrl);
+            return ResultUtils.generate(true);
+        }catch (Exception e){
+            return ResultUtils.generate(false);
+        }
+
     }
 
 
