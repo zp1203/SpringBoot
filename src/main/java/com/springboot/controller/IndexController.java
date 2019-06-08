@@ -48,6 +48,7 @@ public class IndexController {
      * @param id
      * @param name
      * @return
+     * 如果用 Postman 测试这个接口  name要是 中文的话  先把中文加密一下 URLEncoding
      */
 //    @ResponseBody
     @RequestMapping(value = "find/{id}/{name}")
