@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DocumentStorage {
+public class DocumentStorageModel {
 
     @Id
     @GeneratedValue

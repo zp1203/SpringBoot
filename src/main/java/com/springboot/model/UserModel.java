@@ -15,7 +15,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class UserModel {
 
     @Id
     @GeneratedValue

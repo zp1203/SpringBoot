@@ -1,6 +1,6 @@
 package com.springboot.dao;
 
-import com.springboot.model.User;
+import com.springboot.model.UserModel;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserRepositoryTest {
+public class UserModelRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
@@ -37,23 +37,23 @@ public class UserRepositoryTest {
     //插入
     @Test
     public void insertByObject(){
-        User user1= new User();
-        user1.setName("李四");
-        user1.setName_type("administrator");
-        user1.setUser_password("123456");
-        user1.setCreate_time(new Date());
-        user1.setUpdate_time(new Date());
-        int result = userRepository.insertByObject(user1);
+        UserModel userModel1 = new UserModel();
+        userModel1.setName("李四");
+        userModel1.setName_type("administrator");
+        userModel1.setUser_password("123456");
+        userModel1.setCreate_time(new Date());
+        userModel1.setUpdate_time(new Date());
+        int result = userRepository.insertByObject(userModel1);
         Assert.assertEquals(1,result);
     }
 
     //查询
     @Test
     public void findAll(){
-        List<User> result = userRepository.findAll("李四");
-        for (User user : result) {
-            System.out.println(user.getCreate_time());
-            System.out.println(user.getUpdate_time());
+        List<UserModel> result = userRepository.findAll("李四");
+        for (UserModel userModel : result) {
+            System.out.println(userModel.getCreate_time());
+            System.out.println(userModel.getUpdate_time());
         }
         Assert.assertNotNull(result);
     }
