@@ -69,7 +69,7 @@ public class IndexController {
     public Result<Map<String,Object>> getValue(@RequestParam String name,@RequestParam Integer age){
         Map<String,Object> map = new HashMap<>(3);
         try{
-            map.put("年龄",age);
+            map.put("age",age);
             map.put("name",name);
             map.put("value",value);
             return  ResultUtils.generate(HttpServletResponse.SC_OK,map);
