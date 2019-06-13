@@ -1,12 +1,13 @@
-package com.springboot.service;
+package com.springboot.service.impl;
 
 import com.springboot.dao.DocumentStorageRepository;
 import com.springboot.model.DocumentStorageModel;
+import com.springboot.service.documentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DocumentService {
+public class DocumentServiceImpl implements documentService {
 
     @Autowired
     private DocumentStorageRepository documentStorageRepository;

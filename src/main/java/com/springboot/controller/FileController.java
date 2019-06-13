@@ -1,7 +1,7 @@
 package com.springboot.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.springboot.service.DocumentService;
+import com.springboot.service.impl.DocumentServiceImpl;
 import com.springboot.utils.ResultUtils;
 import com.springboot.utils.result.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +35,7 @@ import java.util.UUID;
 public class FileController {
 
     @Autowired
-    private DocumentService documentService;
+    private DocumentServiceImpl documentService;
 
     /**
      * 获取 上传文件路径
