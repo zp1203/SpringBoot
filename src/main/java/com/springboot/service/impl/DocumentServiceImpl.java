@@ -12,7 +12,8 @@ public class DocumentServiceImpl implements documentService {
     @Autowired
     private DocumentStorageRepository documentStorageRepository;
 
-    public void saveDocument(String fileName,String fileUrl){
+    @Override
+    public void saveDocument(String fileName, String fileUrl) {
         DocumentStorageModel documentStorageModel = new DocumentStorageModel();
         String documentUrl = fileUrl.substring(0,fileUrl.lastIndexOf("/"));
         String encryptionDocumentName = fileUrl.substring(fileUrl.lastIndexOf("/")+1);
