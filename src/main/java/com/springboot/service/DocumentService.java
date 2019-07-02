@@ -1,6 +1,6 @@
 package com.springboot.service;
 
-public interface documentService {
+public interface DocumentService {
 
     void saveDocument(String fileName,String fileUrl);
 }
