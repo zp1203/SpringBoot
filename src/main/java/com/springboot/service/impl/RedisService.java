@@ -1,4 +1,4 @@
-package com.springboot.service;
+package com.springboot.service.impl;
 
 import com.springboot.dao.UserRepository;
 import com.springboot.model.UserModel;
