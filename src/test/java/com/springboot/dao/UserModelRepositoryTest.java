@@ -1,5 +1,6 @@
 package com.springboot.dao;
 
+import com.springboot.model.EsDocModel;
 import com.springboot.model.UserModel;
 import org.junit.Assert;
 import org.junit.Test;
@@ -81,6 +82,15 @@ public class UserModelRepositoryTest {
     public void deleteByName(){
         int result = userRepository.deleteByName("李四");
         Assert.assertEquals(1,result);
+    }
+    @Test
+    public void map2string(){
+        EsDocModel esDocModel = new EsDocModel();
+        esDocModel.setId(123);
+        esDocModel.setDocumentName("11111");
+        esDocModel.setDocumentUrl("22");
+        esDocModel.setEncryptionDocumentName("33");
+        System.out.println(esDocModel.toString());
     }
 
 

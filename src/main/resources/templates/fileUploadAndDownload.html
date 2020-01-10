@@ -78,7 +78,24 @@
                     }
                 }
             }
+        });
+        var obj={"id": 1, "documentName": "静态知识调阅.png", "encryptionDocumentName": "/d6763de5-1b49-4de7-89a4-bf29747f57b4静态知识调阅.png", "documentUrl": "D:/upload"};
+        $.ajax({
+            url:"/es/postMsg",
+            type:"POST",
+            data:JSON.stringify(obj),
+            contentType:"application/json",
+            success:function (data) {
+                if(data==null){
+                    alert(data)
+                }else{
+                    alert(data)
+                }
+            }
         })
+
+
+
     })
 </script>
 </body>
