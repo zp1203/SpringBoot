@@ -2,21 +2,26 @@ package com.springboot.controller;
 
 import com.springboot.config.ElasticSearchProperties;
 import com.springboot.model.EsDocModel;
+import com.springboot.model.TestModel;
+import com.springboot.service.ElasticSearch;
 import com.springboot.service.ElasticsearchSave;
 import com.springboot.service.impl.ElasticSearchSaveImpl;
-import com.springboot.utils.EsUtils;
+//import com.springboot.utils.EsUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.websocket.server.PathParam;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/es")
@@ -27,6 +32,8 @@ public class ElasticSearchController {
     private ElasticsearchSave elasRepository;
     @Autowired
     private ElasticSearchProperties elasticSearchProperties;
+    @Autowired
+    private ElasticSearch elasticSearch;
 
     @RequestMapping(value = "/postMsg")
     @ResponseBody
@@ -76,7 +83,23 @@ public class ElasticSearchController {
         return "success";
     }
 
+    @RequestMapping(value = "/save")
+    @ResponseBody
+    public String shiro(){
+        TestModel testModel = new TestModel();
+        testModel.setAge(24);
+        testModel.setId(23L);
+        testModel.setName("zhangsan1234567890");
+        elasticSearch.save(testModel);
+        return "success";
+    }
 
+    @RequestMapping(value = "/sel/{id}")
+    @ResponseBody
+    public Optional<TestModel> shiroSel(@PathVariable Long id){
+        Optional<TestModel> select = elasticSearch.select(id);
+        return elasticSearch.select(id);
+    }
 
 
 
